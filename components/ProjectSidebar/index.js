@@ -1,8 +1,14 @@
-import Icon from '../Icon'
-import styles from './Sidebar.module.css'
+import Icon from "../Icon";
+import styles from "./Sidebar.module.css";
 
 const Sidebar = ({ year, client, services, tech, website }) => (
   <div className={styles.sidebar}>
+    {year && (
+      <Section>
+        <p className={styles.title}>Year</p>
+        <p className={styles.item}>{year}</p>
+      </Section>
+    )}
     {client && (
       <Section>
         <p className={styles.title}>Client</p>
@@ -13,7 +19,7 @@ const Sidebar = ({ year, client, services, tech, website }) => (
       <Section>
         <p className={styles.title}>Services</p>
         <ul>
-          {services.split(', ').map(s => (
+          {services.split(", ").map((s) => (
             <li className={styles.item} key={s}>
               {s}
             </li>
@@ -23,16 +29,16 @@ const Sidebar = ({ year, client, services, tech, website }) => (
     )}
     {tech && (
       <Section className={styles.techs}>
-        {tech.split(', ').map(t => (
+        {tech.split(", ").map((t) => (
           <Icon key={t}>{t}</Icon>
         ))}
       </Section>
     )}
   </div>
-)
+);
 
 const Section = ({ children, className }) => (
-  <div className={[styles.section, className].join(' ')}>{children}</div>
-)
+  <div className={[styles.section, className].join(" ")}>{children}</div>
+);
 
-export default Sidebar
+export default Sidebar;

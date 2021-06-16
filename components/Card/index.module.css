@@ -1,0 +1,10 @@
+.container {
+  width: 200pt;
+  height: 300pt;
+  box-shadow: 0 6px 30px #ddd;
+  transition: all 0.2s ease-in;
+}
+
+.container:hover {
+  box-shadow: 0 6px 30px #bbb;
+}

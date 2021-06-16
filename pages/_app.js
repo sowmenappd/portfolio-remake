@@ -1,30 +1,37 @@
-import App from 'next/app'
-import React from 'react'
+import App from "next/app";
+import React from "react";
+import BlogArticlesContext from "../BlogPosts.Context";
+import getBlogArticles from "../getBlogs";
 
-import getWorks from '../getWorks'
-import WorksContext from '../Works.Context'
+import getProjects from "../getProjects";
+import ProjectsContext from "../Projects.Context";
+
+import "./common.css";
 
 class MyApp extends App {
   static async getInitialProps(appContext) {
-    const appProps = await App.getInitialProps(appContext)
-    const works = await getWorks()
+    const appProps = await App.getInitialProps(appContext);
+    const projects = await getProjects();
+    const blogArticles = await getBlogArticles();
 
-    return { ...appProps, works }
+    return { ...appProps, projects, blogArticles };
   }
 
   render() {
-    const { Component, pageProps, works } = this.props
+    const { Component, pageProps, projects, blogArticles } = this.props;
 
     return (
       <>
-        <WorksContext.Provider value={works}>
-          <>
-            <Component {...pageProps} />
-          </>
-        </WorksContext.Provider>
+        <BlogArticlesContext.Provider value={blogArticles}>
+          <ProjectsContext.Provider value={projects}>
+            <>
+              <Component {...pageProps} />
+            </>
+          </ProjectsContext.Provider>
+        </BlogArticlesContext.Provider>
       </>
-    )
+    );
   }
 }
 
-export default MyApp
+export default MyApp;

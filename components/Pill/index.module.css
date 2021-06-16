@@ -1,0 +1,31 @@
+.categoryBtnContainer {
+  margin: 6px;
+}
+
+.categoryBtnBody {
+  max-width: 150px;
+  width: 100px;
+  background-color: white;
+  padding: 16px 8px;
+  text-align: center;
+  color: black;
+  box-shadow: 0 12px 20px #ddd9;
+  font-size: 18;
+  font-weight: 500;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.categoryBtnBody:hover {
+  cursor: unset;
+  box-shadow: 0 12px 40px #bbb;
+}
+
+.categoryBtnBody p {
+  cursor: pointer;
+}
+
+.categoryBtnBody:active {
+  background-color: #aaa;
+  box-shadow: 0 12px 40px #999;
+}

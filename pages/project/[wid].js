@@ -1,21 +1,21 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useContext, useEffect } from 'react'
-import { useInView } from 'react-intersection-observer'
-import ReactMarkdown from 'react-markdown'
-import removeMd from 'remove-markdown'
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import ReactMarkdown from "react-markdown";
+import removeMd from "remove-markdown";
 
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import Layout from '../../components/Layout'
-import Line from '../../components/Line'
-import SEO from '../../components/SEO'
-import Sidebar from '../../components/WorkSidebar'
-import WorksContext from '../../Works.Context'
-import styles from './work.module.css'
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import Layout from "../../components/Layout";
+import Line from "../../components/Line";
+import SEO from "../../components/SEO";
+import Sidebar from "../../components/ProjectSidebar";
+import ProjectsContext from "../../Projects.Context";
+import styles from "./project.module.css";
 
-const WorkInfo = ({ data, data: { title, website }, content }) => {
+const ProjectInfo = ({ data, data: { title, website }, content }) => {
   return (
     <Layout>
       <div className={styles.workWrapper}>
@@ -23,12 +23,10 @@ const WorkInfo = ({ data, data: { title, website }, content }) => {
           <div className={styles.topContainer}>
             <Line />
             <div className={styles.topInfo}>
-              <hgroup>
-                <h1 className={styles.workTitle}>{title}</h1>
-              </hgroup>
+              <h1 className={styles.workTitle}>{title}</h1>
               <div className={styles.container}>
                 <div className={styles.inner}>
-                  {content ? <ReactMarkdown source={content} /> : 'loading'}
+                  {content ? <ReactMarkdown source={content} /> : "Loading.."}
                   {website && (
                     <a
                       className={styles.websiteLink}
@@ -40,37 +38,36 @@ const WorkInfo = ({ data, data: { title, website }, content }) => {
                     </a>
                   )}
                 </div>
-                <Sidebar {...data} />
+                <Sidebar
+                  {...data}
+                  year={data.date.toString().substring(0, 4)}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 const Post = () => {
   const {
-    query: { wid }
-  } = useRouter()
+    query: { wid },
+  } = useRouter();
 
   useEffect(() => {
-    console.log('wid changed!')
+    console.log("wid changed!");
     setTimeout(() => {
-      document.body.classList.add(styles.withAnim)
-    }, 0)
-  }, [wid])
+      document.body.classList.add(styles.withAnim);
+    }, 0);
+  }, [wid]);
 
-  const works = useContext(WorksContext)
-
-  const currentIndex = works.findIndex(w => w.slug === wid)
+  const works = useContext(ProjectsContext);
 
   const {
     document: { data, content },
-    images
-  } = works.find(w => w.slug === wid)
-
-  const nextWork = works[currentIndex + 1] ? works[currentIndex + 1] : works[0]
+    images,
+  } = works.find((w) => w.slug === wid);
 
   return (
     <>
@@ -84,7 +81,7 @@ const Post = () => {
       />
       <Header />
       <article className={styles.work}>
-        <WorkInfo data={data} content={content} />
+        <ProjectInfo data={data} content={content} />
         <div className={styles.workImages}>
           <div className={styles.images}>
             <ReactMarkdown
@@ -94,13 +91,11 @@ const Post = () => {
           </div>
         </div>
       </article>
-      {/* <NextWork nextSlug={nextWork.slug}>
-        <WorkInfo data={nextWork.document.data} content={nextWork.document.content} />
-      </NextWork> */}
+
       <Footer noBorder />
     </>
-  )
-}
+  );
+};
 
 const P = ({ children }) => {
   if (
@@ -112,43 +107,47 @@ const P = ({ children }) => {
   ) {
     // rendering media without p wrapper
 
-    return children
+    return children;
   }
 
-  return <p>{children}</p>
-}
+  return <p>{children}</p>;
+};
 
 const Img = ({ alt, src }) => {
   const [ref, inView] = useInView({
     threshold: 0.1,
-    triggerOnce: true
-  })
+    triggerOnce: true,
+  });
 
   if (src.match(/.mp4$/)) {
     return (
       <div
-        className={[styles.imgContainer, inView ? styles.imgContainerAnim : ''].join(' ')}
+        className={[
+          styles.imgContainer,
+          inView ? styles.imgContainerAnim : "",
+        ].join(" ")}
         ref={ref}
       >
-        <video muted autoPlay src={inView ? src : ''}></video>
+        <video muted autoPlay src={inView ? src : ""}></video>
       </div>
-    )
+    );
   }
 
   return (
     <Link href={src}>
       <a target="_blank" rel="noopener noreferrer">
         <div
-          className={[styles.imgContainer, inView ? styles.imgContainerAnim : ''].join(
-            ' '
-          )}
+          className={[
+            styles.imgContainer,
+            inView ? styles.imgContainerAnim : "",
+          ].join(" ")}
           ref={ref}
         >
           <img srcSet={`${src} 2x`} alt={alt} />
         </div>
       </a>
     </Link>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

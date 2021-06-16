@@ -1,29 +1,37 @@
-import Link from 'next/link'
+import Link from "next/link";
 
-import styles from './Header.module.css'
-import logo from './logo.svg'
+import styles from "./Header.module.css";
 
-const Header = () => (
+const Header = ({ smallLogo }) => (
   <header className={styles.header}>
     <div className={styles.headerInner}>
       <Link href="/">
         <a>
-          <img className={styles.logo} src={logo} width="150" alt="" />
+          <img
+            className={styles.logo}
+            src={"https://sowmen-personal.s3.amazonaws.com/logo.png"}
+            style={{
+              width: smallLogo ? 70 : 120,
+            }}
+            width={120}
+            alt="logo"
+          />
         </a>
       </Link>
       <nav className={styles.nav}>
-        <a href="https://wunnle.com/">Blog</a>
-        <a
-          className={styles.contactLink}
-          href="mailto:me@wunnle.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Contact
-        </a>
+        <div className={styles.navbuttons}>
+          <Link href="/blog">
+            <a>Blog</a>
+          </Link>
+          <Link href="mailto:sowmen.appd@gmail.com">
+            <a className={styles.contactLink} rel="noopener noreferrer">
+              Contact
+            </a>
+          </Link>
+        </div>
       </nav>
     </div>
   </header>
-)
+);
 
-export default Header
+export default Header;

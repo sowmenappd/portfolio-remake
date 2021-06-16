@@ -1,5 +1,6 @@
 .header .logo {
   width: 136px;
+  border-radius: 8px;
 }
 
 .headerInner {

@@ -1,13 +1,13 @@
-import Head from 'next/head'
-import React from 'react'
+import Head from "next/head";
+import React from "react";
 
-const SEO = ({ title, description, image = '/images/wide-logo.png' }) => {
-  const siteURL = 'https://wunnle.dev'
+const SEO = ({ title, description, image = "/images/wide-logo.png" }) => {
+  const siteURL = "https://sowmenappd.github.io";
 
   return (
     <Head>
       <title>{title}</title>
-      <meta name="twitter:creator" content="@wunnle"></meta>
+      <meta name="twitter:creator" content="@sowmen.r1"></meta>
       <meta name="twitter:card" content="summary_large_image"></meta>
       <meta property="og:type" content="website"></meta>
 
@@ -21,13 +21,29 @@ const SEO = ({ title, description, image = '/images/wide-logo.png' }) => {
       <meta name="twitter:image" content={`${siteURL}${image}`}></meta>
       <link href="/common.css" rel="stylesheet" />
 
-      <link rel="apple-touch-icon" sizes="192x192" href="/images/icon-192x192.png"></link>
-      <link rel="apple-touch-icon" sizes="256x256" href="/images/icon-256x256.png"></link>
-      <link rel="apple-touch-icon" sizes="384x384" href="/images/icon-384x384.png"></link>
-      <link rel="apple-touch-icon" sizes="512x512" href="/images/icon-512x512.png"></link>
+      <link
+        rel="apple-touch-icon"
+        sizes="192x192"
+        href="/images/icon-192x192.png"
+      ></link>
+      <link
+        rel="apple-touch-icon"
+        sizes="256x256"
+        href="/images/icon-256x256.png"
+      ></link>
+      <link
+        rel="apple-touch-icon"
+        sizes="384x384"
+        href="/images/icon-384x384.png"
+      ></link>
+      <link
+        rel="apple-touch-icon"
+        sizes="512x512"
+        href="/images/icon-512x512.png"
+      ></link>
       <link rel="shortcut icon" href="/favicon.ico" />
     </Head>
-  )
-}
+  );
+};
 
-export default SEO
+export default SEO;
