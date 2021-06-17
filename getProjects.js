@@ -25,7 +25,7 @@ async function getProjects() {
       require.context("./projects", true, /images.md$/)
     );
 
-    resolve(pages);
+    resolve([]);
   });
 }
 

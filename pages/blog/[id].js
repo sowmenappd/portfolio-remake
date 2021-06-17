@@ -1,11 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import ReactMarkdown from "react-markdown";
 import removeMd from "remove-markdown";
-import BlogArticlesContext from "../../BlogPosts.Context";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -13,59 +10,72 @@ import Layout from "../../components/Layout";
 import SEO from "../../components/SEO";
 import styles from "./blogs.module.css";
 
-import { FaArrowLeft as BackArrow } from "react-icons/fa";
+import getArticles, { getArticle } from "../../getBlogs";
 
-const BlogView = ({ data, data: { title, website }, content }) => {
+import { FaArrowLeft as BackArrow } from "react-icons/fa";
+import {
+  AiFillHeart as HeartIcon,
+  AiFillTwitterCircle as TwitterIcon,
+} from "react-icons/ai";
+import {
+  FcComments as CommentIcon,
+  FcShare as ShareIcon,
+} from "react-icons/fc";
+
+import { RiFacebookCircleFill as FbIcon } from "react-icons/ri";
+
+const BlogView = ({ title, date, content }) => {
   return (
     <Layout>
-      <div style={{ paddingTop: 20 }}>
-        <div className={styles.workInfo}>
-          <div className={styles.topContainer}>
-            <div className={styles.topInfo}>
-              <div className={styles.container}>
-                <div className={styles.workDetails}>
-                  <Link href="/blog">
-                    <a>
-                      <div style={{ marginBottom: "40px" }}>
-                        <BackArrow size={40} color="blue" />
-                      </div>
-                    </a>
-                  </Link>
-                  <h1 className={styles.workTitle}>{title}</h1>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row-reverse",
-                      alignItems: "center",
-                    }}
-                    className={styles.workDetailsContainer}
-                  >
-                    <div className={styles.workDetailsText}>
-                      <p style={{ fontWeight: 600 }}>Sowmen Rahman</p>
-                      <p style={{ color: "#282c35aa", fontSize: 16 }}>
-                        29th May, 2021
-                      </p>
+      <div style={{ paddingTop: 0 }}>
+        <div className={styles.topContainer}>
+          <div className={styles.topInfo}>
+            <div className={styles.container}>
+              <div className={styles.workDetails}>
+                <Link href="/blog">
+                  <a style={{ textDecoration: "none" }}>
+                    <div style={{ marginBottom: "40px" }}>
+                      <BackArrow size={40} color="blue" />
                     </div>
-
-                    <img
-                      src={"/images/dp.png"}
-                      style={{
-                        borderRadius: "50%",
-                        objectFit: "contain",
-                      }}
-                    />
+                  </a>
+                </Link>
+                <h1 className={styles.workTitle}>{title}</h1>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                    alignItems: "center",
+                  }}
+                  className={styles.workDetailsContainer}
+                >
+                  <img
+                    src={"/images/dp.png"}
+                    style={{
+                      borderRadius: "50%",
+                      objectFit: "contain",
+                    }}
+                  />
+                  <div className={styles.workDetailsText}>
+                    <p style={{ fontWeight: 600 }}>Sowmen Rahman</p>
+                    <p style={{ color: "#282c35aa", fontSize: 16 }}>
+                      {date || "Since time immemorial"}
+                    </p>
                   </div>
                 </div>
-                <div className={styles.inner}>
-                  {content ? (
-                    <ReactMarkdown
-                      source={content}
-                      renderers={{ image: Img, paragraph: P }}
-                    />
-                  ) : (
-                    "Loading.."
-                  )}
-                </div>
+              </div>
+              <div className={styles.inner}>
+                {content ? (
+                  <ReactMarkdown
+                    source={content}
+                    renderers={{
+                      image: Img,
+                      paragraph: P,
+                    }}
+                  />
+                ) : (
+                  "Loading.."
+                )}
+                <ReactionComponent />
               </div>
             </div>
           </div>
@@ -74,41 +84,70 @@ const BlogView = ({ data, data: { title, website }, content }) => {
     </Layout>
   );
 };
-const Blog = () => {
-  const {
-    query: { id },
-  } = useRouter();
 
-  useEffect(() => {
-    setTimeout(() => {
-      document.body.classList.add(styles.withAnim);
-    }, 0);
-  }, [id]);
-
-  const blogArticles = useContext(BlogArticlesContext);
-
-  const {
-    document: { data, content },
-    images,
-  } = blogArticles.find((w) => w.slug === id);
+const Blog = ({ article }) => {
+  if (!article) return <div>Loading</div>;
+  const { id, title, date, content, featuredImg } = article;
 
   return (
     <>
       <Head>
-        <title>{data.title}</title>
+        <title>{title}</title>
       </Head>
       <SEO
-        title={data.title}
-        description={removeMd(content.trim()).substring(0, 160)}
-        image={data.featuredImg}
+        title={title}
+        description={removeMd(content.trim()).substring(6, 160)}
+        image={featuredImg}
+        type="article"
       />
       <Header smallLogo={true} />
       <article className={styles.work}>
-        <BlogView data={data} content={content} />
+        <BlogView
+          title={title}
+          date={date}
+          featuredImg={featuredImg}
+          content={content}
+        />
       </article>
-
-      <Footer noBorder />
+      <Footer />
     </>
+  );
+};
+
+const ReactionComponent = ({ likeCount = 29, commentCount = 10 }) => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        marginTop: 50,
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          width: "20%",
+          display: "flex",
+          justifyContent: "flex-start",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
+          <HeartIcon size={40} color="red" />
+          {29}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
+          <CommentIcon size={40} />
+          {29}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
+          <FbIcon size={40} color="blue" />
+        </div>{" "}
+        <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
+          <TwitterIcon size={40} color="skyblue" />
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -165,5 +204,26 @@ const Img = ({ alt, src }) => {
     </Link>
   );
 };
+
+export async function getStaticProps(context) {
+  const article = await getArticle(context.params.id);
+
+  return {
+    props: {
+      article,
+    },
+    revalidate: 60,
+  };
+}
+
+export async function getStaticPaths() {
+  const articles = await getArticles();
+  const paths = articles.map((a) => ({ params: { id: a.id } }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+}
 
 export default Blog;

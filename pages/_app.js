@@ -6,7 +6,7 @@ import getBlogArticles from "../getBlogs";
 import getProjects from "../getProjects";
 import ProjectsContext from "../Projects.Context";
 
-import "./common.css";
+import "../public/common.css";
 
 class MyApp extends App {
   static async getInitialProps(appContext) {

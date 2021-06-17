@@ -1,10 +1,9 @@
 ---
 title: "Build a highly available Node.js application using Docker,
   NGINX and AWS ELB"
-date: 2020-01-01
-services: "Front-end development, UI/UX design"
-tech: "React, Redux, HTML5, CSS3, Figma"
-website: "https://github.com/sowmenappd/load_balanced_nodejs_app"
+date: "April 15, 2021"
+category: "Frontend"
+tech: "React, Redux, HTML5, CSS3"
 featuredImg: "/build-a-highly-scalable-docker-node-app/preview.png"
 ---
 

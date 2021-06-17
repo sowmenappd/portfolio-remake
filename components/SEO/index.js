@@ -1,7 +1,12 @@
 import Head from "next/head";
 import React from "react";
 
-const SEO = ({ title, description, image = "/images/wide-logo.png" }) => {
+const SEO = ({
+  title,
+  description,
+  type = "website",
+  image = "/images/wide-logo.png",
+}) => {
   const siteURL = "https://sowmenappd.github.io";
 
   return (
@@ -9,7 +14,7 @@ const SEO = ({ title, description, image = "/images/wide-logo.png" }) => {
       <title>{title}</title>
       <meta name="twitter:creator" content="@sowmen.r1"></meta>
       <meta name="twitter:card" content="summary_large_image"></meta>
-      <meta property="og:type" content="website"></meta>
+      <meta property="og:type" content={type}></meta>
 
       <meta property="og:title" content={title}></meta>
       <meta name="twitter:title" content={title}></meta>
@@ -18,6 +23,7 @@ const SEO = ({ title, description, image = "/images/wide-logo.png" }) => {
       <meta name="twitter:description" content={description}></meta>
 
       <meta property="og:image" content={`${siteURL}${image}`}></meta>
+      <meta property="og:locale" content="en_US"></meta>
       <meta name="twitter:image" content={`${siteURL}${image}`}></meta>
       <link href="/common.css" rel="stylesheet" />
 

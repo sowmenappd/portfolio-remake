@@ -8,33 +8,30 @@ import Pill from "../../components/Pill";
 
 import styles from "./blogs.module.css";
 
-import {
-  DiAws as AwsIcon,
-  DiDocker as DockerIcon,
-  DiNodejs as NodeJsIcon,
-} from "react-icons/di";
-import BlogArticlesContext from "../../BlogPosts.Context";
-import getBlogArticles from "../../getBlogs";
+import ICONS from "../../utils/icons";
+import getArticles from "../../getBlogs";
+import SEO from "../../components/SEO";
 
-export default function Blogs({ props }) {
-  const [categories, _] = useState([
-    "Frontend",
-    "Backend",
-    "DevOps",
-    "Gamedev",
-  ]);
+export default function Blogs({ articles }) {
+  const [categories] = useState(["Frontend", "Backend", "DevOps", "Gamedev"]);
   const [selectedCategory, setCategory] = useState(categories[0]);
-
-  const blogArticles = useContext(BlogArticlesContext);
-  console.log("here", Object.keys(blogArticles[0].document.data));
 
   return (
     <Layout>
       <Head>
         <title>SRDev | Tech Articles</title>
       </Head>
+      <SEO
+        title="SRDev | Tech Articles"
+        description="A collection of the best and most useful tech-related articles you'll find online"
+        image={"/images/wide-logo.png"}
+      />
       <Header />
-      <div style={{ paddingTop: 120 }}>
+      <div
+        style={{
+          paddingTop: 80,
+        }}
+      >
         <div className={styles.topContainer2}>
           <div className={styles.topInfo}>
             <div className={styles.container}>
@@ -45,35 +42,19 @@ export default function Blogs({ props }) {
                   categories={categories}
                   selectedCategory={selectedCategory}
                 />
-                <div
-                  style={{
-                    padding: "40px 0",
-                    display: "flex",
-                  }}
-                >
-                  {blogArticles.map(
-                    ({
-                      document: {
-                        content,
-                        data: {
-                          title,
-                          date,
-                          services,
-                          tech,
-                          website,
-                          featuredImg,
-                        },
-                      },
-                      slug,
-                    }) => (
-                      <BlogArticleCard
-                        href={slug}
-                        title={title}
-                        color="#272727"
-                        techIcons={[AwsIcon, DockerIcon, NodeJsIcon]}
-                      />
-                    )
-                  )}
+                <div className={styles.articlesContainer}>
+                  {articles &&
+                    articles
+                      .filter((art) => art.category.includes(selectedCategory))
+                      .map(({ id, title, tech }, i) => (
+                        <BlogArticleCard
+                          key={i}
+                          href={id}
+                          title={title}
+                          color={colors[i % colors.length]}
+                          techIcons={tech?.split(", ")}
+                        />
+                      ))}
                 </div>
               </div>
             </div>
@@ -84,19 +65,7 @@ export default function Blogs({ props }) {
   );
 }
 
-export async function getStaticProps(content) {
-  const articles = await getBlogArticles();
-  console.log(Object.keys(articles));
-
-  //   for (let doc of articles) {
-  //     console.log(doc.data.date);
-  //     doc.data.date = doc.data.date.toString();
-  //   }
-
-  return {
-    props: { articles: {} },
-  };
-}
+const colors = ["#272727", "#FF5666", "#208AAE", "#1C2321"];
 
 const BlogCategorySelectionPanel = ({
   categories,
@@ -104,16 +73,24 @@ const BlogCategorySelectionPanel = ({
   onSelected,
 }) => {
   return (
-    <div className={styles.categoryContainer}>
-      {categories.map((cat, i) => (
-        <Pill
-          key={i}
-          title={cat}
-          onPress={() => onSelected?.(cat)}
-          color={cat === selectedCategory ? "white" : "black"}
-          backgroundColor={cat === selectedCategory ? "teal" : "white"}
-        />
-      ))}
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        overflow: "hidden",
+      }}
+    >
+      <div className={styles.categoryContainer}>
+        {categories.map((cat, i) => (
+          <Pill
+            key={i}
+            title={cat}
+            onPress={() => onSelected?.(cat)}
+            color={cat === selectedCategory ? "white" : "black"}
+            backgroundColor={cat === selectedCategory ? "teal" : "white"}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -126,10 +103,10 @@ const BlogArticleCard = ({
   textColor = "white",
 }) => {
   return (
-    <>
+    <div className={styles.articleContainer}>
       <Link href={`/blog/${href}`}>
         <a>
-          <>
+          <div style={{ marginRight: "15px" }}>
             <Card
               style={{
                 paddingTop: "16px",
@@ -140,38 +117,64 @@ const BlogArticleCard = ({
                 color: textColor || "black",
                 lineHeight: "1.8em",
                 height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                minHeight: "320px",
               }}
             >
-              <h2>{title}</h2>
               <div
                 style={{
-                  paddingRight: "10px",
-                  paddingTop: "0px",
-                  marginRight: "10px",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  fontWeight: 600,
+                  paddingLeft: "10px",
+                  paddingRight: "20px",
                 }}
               >
-                1 MIN READ
+                <h2>{title}</h2>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    fontWeight: 600,
+                  }}
+                >
+                  1 MIN READ
+                </div>
               </div>
               <div
                 style={{
                   padding: "10px 20px",
                   display: "flex",
-                  justifyContent: "flex-start",
+                  justifyContent: "flex-end",
                 }}
               >
-                {techIcons.map((Icon) => (
-                  <div style={{ margin: 2, fontSize: 50 }}>
-                    <Icon />
-                  </div>
-                ))}
+                <div
+                  style={{
+                    display: "flex",
+                  }}
+                >
+                  {techIcons?.map((iconName, i) => {
+                    const IconComponent = ICONS[iconName];
+                    return (
+                      <div key={i} style={{ marginLeft: 5, marginRight: 5 }}>
+                        <IconComponent size={35} />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </Card>
-          </>
+          </div>
         </a>
       </Link>
-    </>
+    </div>
   );
 };
+
+export async function getStaticProps(context) {
+  const articles = await getArticles();
+
+  return {
+    props: { articles },
+    revalidate: 60,
+  };
+}

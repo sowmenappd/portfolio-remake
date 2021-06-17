@@ -9,7 +9,7 @@ const Header = ({ smallLogo }) => (
         <a>
           <img
             className={styles.logo}
-            src={"https://sowmen-personal.s3.amazonaws.com/logo.png"}
+            src={"/images/wide-logo.png"}
             style={{
               width: smallLogo ? 70 : 120,
             }}
