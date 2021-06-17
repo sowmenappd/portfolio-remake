@@ -3,12 +3,8 @@ import {
   FaReact as React,
   FaServer as Server,
 } from "react-icons/fa";
-import {
-  AiFillHeart as Heart,
-  AiFillTwitterCircle as Twitter,
-} from "react-icons/ai";
+import { AiFillHeart as Heart } from "react-icons/ai";
 import { FcComments as Comment, FcShare as Share } from "react-icons/fc";
-import { RiFacebookCircleFill as Facebook } from "react-icons/ri";
 import {
   DiAws as AWS,
   DiDocker as Docker,
@@ -23,6 +19,10 @@ import {
   SiNginx as NGINX,
   SiApache as Apache,
   SiRedux as Redux,
+  SiGithub as Github,
+  SiTwitter as Twitter,
+  SiFacebook as Facebook,
+  SiInstagram as Instagram,
 } from "react-icons/si";
 
 const ICONS = {
@@ -33,8 +33,10 @@ const ICONS = {
   BackArrow,
   Docker,
   Facebook,
+  Github,
   Heart,
   HTML5,
+  Instagram,
   NGINX,
   "Load balancing": LoadBalancing,
   NodeJs,

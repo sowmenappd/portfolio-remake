@@ -22,7 +22,7 @@ const Projects = () => {
             ))}
         </div>
       </div>
-      <Footer />
+      <Footer noBorder />
     </>
   );
 };

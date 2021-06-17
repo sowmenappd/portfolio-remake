@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start"
   },
   "dependencies": {
@@ -19,7 +19,6 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-ga": "^3.3.0",
-    "react-icons": "^4.2.0",
     "react-intersection-observer": "^8.31.0",
     "react-markdown": "^5.0.3",
     "remove-markdown": "^0.3.0"

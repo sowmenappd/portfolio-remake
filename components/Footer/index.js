@@ -5,34 +5,56 @@ import styles from "./Footer.module.css";
 import githubLogo from "./github.svg";
 import twitterLogo from "./twitter.svg";
 
+import ICONS from "../../utils/icons";
+
 const Footer = ({ noBorder }) => (
   <footer>
-    <div className={noBorder ? styles.containerNoBorder : styles.container}>
+    <div
+      className={noBorder ? styles.containerNoBorder : styles.container}
+      style={{ width: "100%" }}
+    >
       <Link href="/">
         <img
-          src={"https://sowmen-personal.s3.amazonaws.com/logo.png"}
+          src={"/images/wide-logo.png"}
           width="100px"
           style={{ borderRadius: "8px" }}
-          alt="sr logo"
+          alt="logo"
         />
       </Link>
       <nav className={styles.nav}>
         <ul>
           <li>
-            <a
+            <span style={{ margin: 2 }}>
+              <a target="_blank" href="https://github.com/sowmenappd">
+                {ICONS.Github({ size: 24, color: "gray" })}
+              </a>
+            </span>
+            <span style={{ margin: 2 }}>
+              <a
+                target="_blank"
+                href="https://www.facebook.com/sowmen.rahman.01"
+              >
+                {ICONS.Facebook({ size: 24, color: "blue" })}
+              </a>
+            </span>
+            <span style={{ margin: 2 }}>
+              <a target="_blank" href="https://www.instagram.com/art1san__">
+                {ICONS.Instagram({ size: 24, color: "black" })}
+              </a>
+            </span>
+            <span style={{ margin: 2 }}>
+              <a target="_blank" href="https://twitter.com/sowmenr">
+                {ICONS.Twitter({ size: 24, color: "#1DA1F2" })}
+              </a>
+            </span>
+
+            {/* <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://facebook.com/sowmen.rahman.01"
-            >
-              <img src={twitterLogo} alt="sowmen rahman on facebook" />
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/sowmenappd"
+              href=""
             >
               <img src={githubLogo} alt="sowmen rahman on github" />
-            </a>
+            </a> */}
           </li>
         </ul>
       </nav>

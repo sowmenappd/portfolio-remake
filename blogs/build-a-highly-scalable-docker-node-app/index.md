@@ -3,7 +3,7 @@ title: "Build a highly available Node.js application using Docker,
   NGINX and AWS ELB"
 date: "April 15, 2021"
 category: "Frontend"
-tech: "React, Redux, HTML5, CSS3"
+tech: "AWS, NodeJs, Docker"
 featuredImg: "/build-a-highly-scalable-docker-node-app/preview.png"
 ---
 

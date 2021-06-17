@@ -14,7 +14,7 @@ class MyApp extends App {
     const projects = await getProjects();
     const blogArticles = await getBlogArticles();
 
-    return { ...appProps, projects, blogArticles };
+    return { ...appProps, projects: [], blogArticles };
   }
 
   render() {
