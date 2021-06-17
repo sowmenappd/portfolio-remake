@@ -212,7 +212,8 @@ const ReactionComponent = ({
             <a
               target="_blank"
               href={`http://twitter.com/share?url=${
-                process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
+                "https://" + process.env.NEXT_PUBLIC_VERCEL_URL ||
+                "http://localhost:3000"
               }/blog/${id}`}
             >
               {ICONS.Twitter({ size: 32, color: "#1DA1F2" })}

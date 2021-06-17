@@ -13,7 +13,7 @@ const SEO = ({
   return (
     <Head>
       <title>{title}</title>
-      <meta name="twitter:creator" content="@sowmen.r1"></meta>
+      <meta name="twitter:creator" content="@sowmenr"></meta>
       <meta name="twitter:card" content="summary_large_image"></meta>
       <meta property="og:type" content={type}></meta>
 
