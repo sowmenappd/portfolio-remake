@@ -23,9 +23,9 @@ const SEO = ({
       <meta name="description" content={description}></meta>
       <meta name="twitter:description" content={description}></meta>
 
-      <meta property="og:image" content={`${siteURL}${image}`}></meta>
+      <meta property="og:image" content={`https://${siteURL}${image}`}></meta>
       <meta property="og:locale" content="en_US"></meta>
-      <meta name="twitter:image" content={`${siteURL}${image}`}></meta>
+      <meta name="twitter:image" content={`https://${siteURL}${image}`}></meta>
       <link href="/common.css" rel="stylesheet" />
 
       <link
