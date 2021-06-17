@@ -1,8 +1,17 @@
-/* article */
-/* 
-.blogArticleCard {
-  margin: 6px;
-} */
+.bouncingButton {
+  font-weight: 700;
+  font-size: 20;
+  margin-left: 6;
+  transition: all 0.05s ease-in-out;
+}
+
+.bouncingButton:active {
+  transform: scale(1.2);
+}
+
+.bouncingButton:after {
+  transform: scale(1);
+}
 
 .categoryContainer {
   display: flex;

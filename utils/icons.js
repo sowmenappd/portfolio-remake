@@ -3,7 +3,10 @@ import {
   FaReact as React,
   FaServer as Server,
 } from "react-icons/fa";
-import { AiFillHeart as Heart } from "react-icons/ai";
+import {
+  AiFillHeart as Heart,
+  AiOutlineHeart as HeartOutline,
+} from "react-icons/ai";
 import { FcComments as Comment, FcShare as Share } from "react-icons/fc";
 import {
   DiAws as AWS,
@@ -35,6 +38,7 @@ const ICONS = {
   Facebook,
   Github,
   Heart,
+  HeartOutline,
   HTML5,
   Instagram,
   NGINX,

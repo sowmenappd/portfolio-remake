@@ -5,7 +5,6 @@ export default function handler(req, res) {
   const {
     query: { id },
     method,
-    body,
   } = req;
 
   let status = 404;
@@ -19,13 +18,10 @@ export default function handler(req, res) {
     }
 
     if (method === "POST") {
-      const likes =
-        jsonData.likes +
-        (body.likeCount && typeof body.likeCount === "number"
-          ? body.likeCount
-          : 0);
+      const likes = jsonData.likes + 1;
       jsonData.likes = likes;
       fs.writeFileSync(dataPath, JSON.stringify(jsonData));
+      console.log("likes ", likes, id);
       res.send({ status, ...jsonData });
     } else if (method === "GET") {
       res.send({
@@ -35,6 +31,6 @@ export default function handler(req, res) {
     }
   } catch (err) {
     console.log(err);
-    res.status(404).json({ error: "Invalid request." });
+    res.status(404).json({ status: 404, error: "Invalid request." });
   }
 }

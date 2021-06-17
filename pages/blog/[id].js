@@ -23,8 +23,13 @@ import {
 } from "react-icons/fc";
 
 import { RiFacebookCircleFill as FbIcon } from "react-icons/ri";
+import { useState } from "react";
+import ICONS from "../../utils/icons";
 
-const BlogView = ({ title, date, content }) => {
+const HeartFilled = ICONS.Heart;
+const HeartOutlined = ICONS.HeartOutline;
+
+const BlogView = ({ id, title, date, content, likes, onLike }) => {
   return (
     <Layout>
       <div style={{ paddingTop: 0 }}>
@@ -75,7 +80,12 @@ const BlogView = ({ title, date, content }) => {
                 ) : (
                   "Loading.."
                 )}
-                <ReactionComponent />
+                <ReactionComponent
+                  id={id}
+                  likes={likes}
+                  comments={[]}
+                  onLike={onLike}
+                />
               </div>
             </div>
           </div>
@@ -87,7 +97,14 @@ const BlogView = ({ title, date, content }) => {
 
 const Blog = ({ article }) => {
   if (!article) return <div>Loading</div>;
-  const { id, title, date, content, featuredImg } = article;
+  const { id, title, date, content, featuredImg, stats } = article;
+
+  const [articleLikes, setArticleLikes] = useState(stats.likes);
+
+  const handleLike = async () => {
+    const newStats = await likeArticle(id);
+    setArticleLikes(newStats.likes);
+  };
 
   return (
     <>
@@ -103,10 +120,13 @@ const Blog = ({ article }) => {
       <Header smallLogo={true} />
       <article className={styles.work}>
         <BlogView
+          id={id}
           title={title}
           date={date}
           featuredImg={featuredImg}
           content={content}
+          likes={articleLikes}
+          onLike={handleLike}
         />
       </article>
       <Footer />
@@ -114,7 +134,9 @@ const Blog = ({ article }) => {
   );
 };
 
-const ReactionComponent = ({ likeCount = 29, commentCount = 10 }) => {
+const ReactionComponent = ({ id, likes = 0, comments = [], onLike = null }) => {
+  const [liked, setLiked] = useState(false);
+
   return (
     <div
       style={{
@@ -127,24 +149,50 @@ const ReactionComponent = ({ likeCount = 29, commentCount = 10 }) => {
     >
       <div
         style={{
-          width: "20%",
+          width: "100%",
           display: "flex",
-          justifyContent: "flex-start",
+          justifyContent: "space-between",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
-          <HeartIcon size={40} color="red" />
-          {29}
+        <div style={{ display: "flex" }}>
+          <div
+            style={{ display: "flex", alignItems: "center", padding: 10 }}
+            onClick={() => {
+              setLiked(true);
+              onLike?.();
+            }}
+          >
+            {liked ? (
+              <HeartFilled
+                size={40}
+                color="red"
+                className={styles.bouncingButton}
+              />
+            ) : (
+              <HeartOutlined
+                size={40}
+                color="red"
+                className={styles.bouncingButton}
+              />
+            )}
+            <span style={{ fontWeight: "700", fontSize: 20, marginLeft: 6 }}>
+              {likes}
+            </span>
+          </div>
+          {/* <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
+            <CommentIcon size={40} />
+            <span style={{ fontWeight: "700", fontSize: 20, marginLeft: 6 }}>
+              {comments.length}
+            </span>
+          </div> */}
         </div>
-        <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
-          <CommentIcon size={40} />
-          {29}
-        </div>
-        <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
-          <FbIcon size={40} color="blue" />
-        </div>{" "}
-        <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
-          <TwitterIcon size={40} color="skyblue" />
+        <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", alignItems: "center", padding: 5 }}>
+            <FbIcon size={35} color="blue" />
+          </div>{" "}
+          <div style={{ display: "flex", alignItems: "center", padding: 5 }}>
+            <TwitterIcon size={35} color="skyblue" />
+          </div>
         </div>
       </div>
     </div>
@@ -205,12 +253,32 @@ const Img = ({ alt, src }) => {
   );
 };
 
+const getStats = async (id) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
+    method: "GET",
+  });
+  const stats = await res.json();
+  return stats;
+};
+
+const likeArticle = async (id) => {
+  if (!id) return null;
+
+  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
+    method: "POST",
+  }).then((res) => res.json());
+
+  return res;
+};
+
 export async function getStaticProps(context) {
-  const article = await getArticle(context.params.id);
+  const id = context.params.id;
+  const article = await getArticle(id);
+  const stats = await getStats(id);
 
   return {
     props: {
-      article,
+      article: { ...article, stats },
     },
     revalidate: 60,
   };
