@@ -4,7 +4,7 @@ title: "Build a highly available Node.js application using Docker,
 date: "April 15, 2021"
 category: "Frontend"
 tech: "AWS, NodeJs, Docker"
-featuredImg: "/build-a-highly-scalable-docker-node-app/preview.png"
+featuredImg: "/build-a-highly-scalable-docker-node-app/cover.jpg"
 ---
 
 ![Image](/build-a-highly-scalable-docker-node-app/cover.jpg)
