@@ -202,7 +202,7 @@ const ReactionComponent = ({
             <a
               target="_blank"
               href={`https://www.facebook.com/sharer/sharer.php?u=${
-                process.env.VERCEL_URL || "http://localhost:3000"
+                process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
               }/blog/${id}`}
             >
               {ICONS.Facebook({ size: 32, color: "blue" })}
@@ -212,7 +212,7 @@ const ReactionComponent = ({
             <a
               target="_blank"
               href={`http://twitter.com/share?url=${
-                process.env.VERCEL_URL || "http://localhost:3000"
+                process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
               }/blog/${id}`}
             >
               {ICONS.Twitter({ size: 32, color: "#1DA1F2" })}
