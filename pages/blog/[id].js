@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import ReactMarkdown from "react-markdown";
 import removeMd from "remove-markdown";
@@ -13,21 +14,21 @@ import styles from "./blogs.module.css";
 import getArticles, { getArticle } from "../../getBlogs";
 
 import { FaArrowLeft as BackArrow } from "react-icons/fa";
-import {
-  AiFillHeart as HeartIcon,
-  AiFillTwitterCircle as TwitterIcon,
-} from "react-icons/ai";
-import {
-  FcComments as CommentIcon,
-  FcShare as ShareIcon,
-} from "react-icons/fc";
+// import {
+//   AiFillHeart as HeartIcon,
+//   AiFillTwitterCircle as TwitterIcon,
+// } from "react-icons/ai";
+// import {
+//   FcComments as CommentIcon,
+//   FcShare as ShareIcon,
+// } from "react-icons/fc";
 
 import { RiFacebookCircleFill as FbIcon } from "react-icons/ri";
 import { useState } from "react";
-import ICONS from "../../utils/icons";
 
-const HeartFilled = ICONS.Heart;
-const HeartOutlined = ICONS.HeartOutline;
+import ICONS from "../../utils/icons";
+// const HeartFilled = ICONS.Heart;
+// const HeartOutlined = ICONS.HeartOutline;
 
 const BlogView = ({ id, title, date, content, likes, onLike }) => {
   return (
@@ -82,9 +83,10 @@ const BlogView = ({ id, title, date, content, likes, onLike }) => {
                 )}
                 <ReactionComponent
                   id={id}
-                  likes={likes}
+                  title={title}
+                  likes={0} // likes
                   comments={[]}
-                  onLike={onLike}
+                  onLike={null} // onLike
                 />
               </div>
             </div>
@@ -99,12 +101,11 @@ const Blog = ({ article }) => {
   if (!article) return <div>Loading</div>;
   const { id, title, date, content, featuredImg, stats } = article;
 
-  const [articleLikes, setArticleLikes] = useState(stats.likes);
-
-  const handleLike = async () => {
-    const newStats = await likeArticle(id);
-    setArticleLikes(newStats.likes);
-  };
+  const [articleLikes, setArticleLikes] = useState(0); // stats.likes
+  // const handleLike = async () => {
+  //   const newStats = await likeArticle(id);
+  //   setArticleLikes(newStats.likes);
+  // };
 
   return (
     <>
@@ -126,7 +127,7 @@ const Blog = ({ article }) => {
           featuredImg={featuredImg}
           content={content}
           likes={articleLikes}
-          onLike={handleLike}
+          onLike={null} // handleLike
         />
       </article>
       <Footer />
@@ -134,8 +135,17 @@ const Blog = ({ article }) => {
   );
 };
 
-const ReactionComponent = ({ id, likes = 0, comments = [], onLike = null }) => {
+const ReactionComponent = ({
+  id,
+  title,
+  likes = 0,
+  comments = [],
+  onLike = null,
+}) => {
   const [liked, setLiked] = useState(false);
+
+  const { route } = useRouter();
+  console.log("basePath", route);
 
   return (
     <div
@@ -154,7 +164,7 @@ const ReactionComponent = ({ id, likes = 0, comments = [], onLike = null }) => {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ display: "flex" }}>
+        {/* <div style={{ display: "flex" }}>
           <div
             style={{ display: "flex", alignItems: "center", padding: 10 }}
             onClick={() => {
@@ -179,20 +189,35 @@ const ReactionComponent = ({ id, likes = 0, comments = [], onLike = null }) => {
               {likes}
             </span>
           </div>
-          {/* <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", padding: 10 }}>
             <CommentIcon size={40} />
             <span style={{ fontWeight: "700", fontSize: 20, marginLeft: 6 }}>
               {comments.length}
             </span>
-          </div> */}
-        </div>
-        <div style={{ display: "flex" }}>
-          <div style={{ display: "flex", alignItems: "center", padding: 5 }}>
-            <FbIcon size={35} color="blue" />
-          </div>{" "}
-          <div style={{ display: "flex", alignItems: "center", padding: 5 }}>
-            <TwitterIcon size={35} color="skyblue" />
-          </div>
+          </div> 
+        </div>*/}
+        <div style={{ display: "flex", padding: 5, alignItems: "center" }}>
+          <span style={{ fontSize: 18 }}>Share on:</span>
+          <span style={{ marginLeft: 10, marginRight: 10 }}>
+            <a
+              target="_blank"
+              href={`https://www.facebook.com/sharer/sharer.php?u=${
+                process.env.VERCEL_URL || "http://localhost:3000"
+              }/blog/${id}`}
+            >
+              {ICONS.Facebook({ size: 32, color: "blue" })}
+            </a>
+          </span>
+          <span style={{ marginLeft: 10, marginRight: 10 }}>
+            <a
+              target="_blank"
+              href={`http://twitter.com/share?url=${
+                process.env.VERCEL_URL || "http://localhost:3000"
+              }/blog/${id}`}
+            >
+              {ICONS.Twitter({ size: 32, color: "#1DA1F2" })}
+            </a>
+          </span>
         </div>
       </div>
     </div>
@@ -253,34 +278,16 @@ const Img = ({ alt, src }) => {
   );
 };
 
-const getStats = async (id) => {
-  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
-    method: "GET",
-  });
-  const stats = await res.json();
-  return stats;
-};
-
-const likeArticle = async (id) => {
-  if (!id) return null;
-
-  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
-    method: "POST",
-  }).then((res) => res.json());
-
-  return res;
-};
-
 export async function getStaticProps(context) {
   const id = context.params.id;
   const article = await getArticle(id);
-  const stats = await getStats(id);
+  // const stats = await getStats(id);
 
   return {
     props: {
-      article: { ...article, stats },
+      article: { ...article }, //stats
     },
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
 

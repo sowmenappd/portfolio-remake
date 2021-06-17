@@ -2,8 +2,6 @@ import Link from "next/link";
 import React from "react";
 
 import styles from "./Footer.module.css";
-import githubLogo from "./github.svg";
-import twitterLogo from "./twitter.svg";
 
 import ICONS from "../../utils/icons";
 

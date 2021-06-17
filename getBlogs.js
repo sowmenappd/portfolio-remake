@@ -1,4 +1,5 @@
 import matter from "gray-matter";
+import path from "path";
 
 async function getArticles() {
   return new Promise((resolve) => {
@@ -39,5 +40,20 @@ export async function getArticle(id) {
   const articles = await getArticles();
   return articles.find((a) => a.id == id);
 }
+
+// export const getStats = async (id) => {
+//   if (!id) return null;
+
+//   const path = path.join(process.cwd(), "blog_data");
+//   return stats;
+// };
+
+// export const likeArticle = async (id) => {
+//   if (!id) return null;
+
+//   const path = path.join(process.cwd(), "blog_data");
+
+//   return res;
+// };
 
 export default getArticles;
