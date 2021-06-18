@@ -8,37 +8,67 @@ featuredImg: "/intro-to-devops/cover.jpg"
 
 ![Image](/intro-to-devops/cover.jpg)
 
-## What is blue-green deployment?
+## **So.. what’s this buzz about DevOps? It won’t kill you to know about how DevOps may save your time and sanity writing code.**
 
-The strategy gets its name from the idea of having two concurrent environments, and switching between environments. The environments have different code revision signatures.
+### **Let’s look at a dev scenario.**
+It wasn’t that long ago, when coders used to write company software code, build it, then hand over the new version to the operations team for testing and debugging. The operations team would sometimes also do this ‘quality and assurance’ testing to find out how well the software would work (with or without bugs), and the potential impact of the software’s new version on the people.
 
-The **blue** environment is the old environment.
-The **green** environment is the newer and more updated environment.
+This process is a very lengthy process. First of all, there are two separate teams that are working on the same product, but stay completely isolated from each other; no communication between them other than in the contact periods of code finishes and dev responses, (and occasionally, probably at coffee breaks..)
 
-Since the deployment process changes the _web pointers_ from the blue environment to the green environment, it is known as the **Blue-Green** deployment strategy.
+The developer team might not be able to use feedback properly during the interim development phase from the system operations and management team (which could have accelerated the product backlog that’s been on the agile board for what, a few weeks now?)
 
-Of the many benefits provided by the blue-green deployment strategy, the most important few are:
+### **Now, let’s look at a different scenario.**
 
-### 1. Software & service downtime reduction
+Have you ever found yourself applying for a job (presumably a small or medium startup/firm), reading the technical skill requirements on the job post on LinkedIn, and after you get hired, and take on your first major project at the company, build a few modules, connect the backend your teammates made to the frontend you coded, and then… the project manager dumps a load of irrelevant project operations tasks that don’t seem important, at the same time have you questioning why you’re the one being assigned to this? What is my role in this company? Am I a developer or am I the sysops guy? Do I really need to code anymore or is handling the platform now my main job?
 
-If production deployments relied on a single environment, there would _definitely_ be server downtime, owing to the time cost of source code updates and patches. However, if there are two environments running concurrently, this downtime gets reduced to nil given there occurs no mid-modification issues.
+If you read through that painfully long paragraph, my friend, you’re not the first one to feel that way.
 
-### 2. Experimental feature testing
+Having reached that stage, you might suddenly realize that maybe you lack a vast range of skills that were never asked for the job at the first place. You may have a lot of questions. But I assure you:
 
-When new features need to tested publicly, this strategy offers significant advantages. Since the idea of this strategy involves having 2 environments, a small portion of the users can be exposed to one of the environments with the experimental features. Depending on the response of the users, devs can take further decisions about the impact of the new features, change the ratio of exposure or totally upgrade to the new version.
+![We’re getting there: SEPTA](https://dev-to-uploads.s3.amazonaws.com/i/9u9veuvxrjr2y5now730.jpg)
 
-### 3. Isolation for testing and production environments
 
-One of the better uses of blue-green deployment strategy is keeping the development and production environments separated from each other. Devs should never have to worry about writing new code or changing infrastructure which will directly impact the live servers. This will only cause public frustration..
+As [SEPTA](http://septa.org/)’s slogan goes, so goes the cycle of software development at every software company that has ever existed. In context of the first scenario, when there’s simply too freaking much work for a seriously short deadline on the agile board, and for the second scenario, when there’s a wall of confusion in the mind of the developer regarding what stages of the product he’s supposed to be working on, DevOps is your friend.
+Leading infrastructure and IT innovation enterprise AWS terms DevOps as
 
-_..something which can easily turn into memes_
+> The combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes.
 
-### 4. Crashes and rollbacks
+Or as I like to say:
 
-One of the more common and _mostly frightening_ term for any software company on earth would be **crash**. But even though, code has been tested hundred of times before release, there might be times when a few bugs may jump out of the bucket. Critical ones. Having a blue-green deployment technique can be a life-saver during these cases, as teams can switch back to the stable older environment where those bugs are not encountered, thus giving them freedom and salvation from the torment of the public and media as they sit down to fix the bugs and redeploy again. If some different deployment technique (_in-place deployment_) was used instead, rollbacks would become very lengthy as there would be **_no older environment to switch back to_**.
+### **DevOps is a modern way to streamline activities in a software’s development phases in production.**
 
-In the industry of cloud and web tech, **blue-green** or **_canary_** deployment are still one of the main and most popular deployment strategies that is used to upgrade running servers with the latest production code. Every big software company (Facebook, Google, Amazon, and so on..) has used or is still using this strategy for their deployments because of the conveniences it provides.
+But does this solve the problems that we have in mind?
 
-However, a downside to this strategy is that, as the switching of the environments are handled by the _load-balancers_, a switching time-delay due to DNS propagation occurs. DNS servers are updated with the correct server DNS names(their unique address on the web) via propagation, which means, it takes time to reach every domain name server across the planet. As a result, people of some regions of the world may not be able to access the changes in the servers as soon as the deployment happens, _because the DNS servers closest to them are still pointing to the_ **_older servers._** Sometimes, when a new deployment has taken place with bugs in the code, a rollback although issued instantly will not be perceived in every part of the world. _So people will still be looking at the buggy version of the software even though the buggy version has been correctly roll backed from._
+### **Absolutely!**
 
-Although these can occur, proper trial and testing can help resolve these problems before they are released to the open world. Compared to the bigger pool of advantages, these problems are easily overlooked and are the reason why blue-green deployment strategies are still preferred today.
+You, as part of a development team will often be under enormous pressure, thanks largely to the principles of agile development. The intense focus on constantly releasing products and their subsequent newer versions to market means that you as a team member will have a limited understanding of enterprise operations and a limited concept of risk, causing you to act like a SysOps guy haphazardly and throwing yourself plus the team, into a never-ending release cycle. The concepts of validation, long-term strategy, and the business vision start to escape your grip. This results in teams like yours in the company to become so desperately focused on the day-to-day that even major technological shifts can pass them by.
+
+#### **Imagine how difficult this can become if you’re working in a small team, and you’re in charge of everything that needs to happen.**
+
+Meanwhile, the operations teams in your company(in the first scenario) begin to act like development teams. They begin suggesting changes to the enterprise architecture and the production process based on issues they observe on a routine basis. Quick fixes are often applied based on a limited range of input, only to have a rollback or hotfix take place the next day. And then everything goes haywire when the solution that was implemented earlier is revealed to be the wrong one.
+
+#### **The process repeats itself and generally gets worse over time and ultimately the project is ready for blast-off, destination Screwed.**
+
+Stay careful when I say this as it applies easily to just about every business or company nowadays, whether you’re a business selling groceries or selling ads, small or large, all businesses are now dependent on IT in one way or the other. These problems are ever so common, and without a proper strategy, nobody will actual understand what’s going on or how to solve it. This gives rise to the mentality that company work often gets stressful trying to debug bugs and crashes. Now you know why this mentality catches on.
+
+## **So how does DevOps help you in light of the problems above, I hear you ask?**
+
+Earlier on, I stated that all these massive problems that occur very frequently at tech companies at scale or not, can be solved using DevOps. Yes, now we move to the core of this story.
+
+DevOps is the result of many years of software development practices, all refined to form a culture that aims to refine the cycle of software development itself.
+
+_Cool, isn’t it?_
+
+DevOps is not a tool, but a cultural practice that intends to solve complex problems while building a software that requires developing, building, testing and deploying. Along with Q&A, these 4 are the core phases in the development cycles that all software releases go through. And the problem occurs when there are different teams that miscommunicate how different problems are tackled during any of the phases, like the ones we saw above.
+
+The idea of DevOps is to automate various processes in this massive cycle by breaking it up into smaller tasks, so that these do not have any complex dependency. So whenever a problem looms up in the testing phase, that problem doesn’t bog up the coding or building cycle for that matter.
+
+![Software development pipeline](https://miro.medium.com/max/2400/0*xIgSzbH0Rl-m3GQ8.png)
+
+The industry of software has been undergoing rapid changes regarding it’s development strategies. One of the software development strategies that we have seen above, also one of the most common strategies seen in many companies during developing production-grade software, works by separating the development and operations team. This separation can cause countless problems(as described earlier).
+
+DevOps at it’s core, aims to manage these problems by uniting the different teams on the project. These teams are no longer “**siloed**” to their technical and/or operation roles. The teams start to work together and the activities of the entire application development cycle is distributed to all role-players in the company. One of the perks of doing this is that, the engineers no longer focus on only the code, but also the underlying architecture which helps them to identify and prevent problems at an early stage. The operations team on the other hand gets to interact with the code, and therefore by analyzing how the components in the app/product work can make infrastructure optimizations.
+
+To take on the advantages of DevOps, a change of mindset is necessary. A shakedown of the “no-dependency strategy” of dev and ops need to happen, for better efficiency thus, unite the teams.
+
+DevOps requires a set of tools(software) or a technology stack, that helps with the management of code and infrastructure, deployment of code and server configurations. No matter how the teams decide to choose, a useful set of tools is crucial for a good DevOps environment. Engineers can then automate processes by running small tasks, change the system specs when the software itself starts to evolve, evidently it helps the company push out product faster to the growing customer pool. These eventually become a habitual practice at the company, allowing developers and system admins to grow from their separate roles to learning a range of functions that also help them in various tasks. This increases the team’s velocity in a development cycle. A strong leadership and willingness to take responsibility of one’s own action and role in the cycle is also a key ingredient for the success of this environment. By adopting DevOps, the devs and ops teams not only work better together but progress to a unity point in the company where confusion about the product and development cycle is minimized.
