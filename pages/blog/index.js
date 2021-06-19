@@ -12,9 +12,11 @@ import ICONS from "../../utils/icons";
 import getArticles from "../../getBlogs";
 import SEO from "../../components/SEO";
 
+const CATEGORIES = ["Frontend", "Backend", "DevOps", "Gamedev", "Software Engineering"]
+
 export default function Blogs({ articles }) {
-  const [categories] = useState(["Frontend", "Backend", "DevOps", "Gamedev"]);
-  const [selectedCategory, setCategory] = useState(categories[0]);
+  
+  const [selectedCategory, setCategory] = useState(CATEGORIES[0]);
 
   return (
     <Layout>
@@ -39,7 +41,7 @@ export default function Blogs({ articles }) {
                 <h1 className={styles.workTitle}>Blog</h1>
                 <BlogCategorySelectionPanel
                   onSelected={(cat) => setCategory(cat)}
-                  categories={categories}
+                  categories={CATEGORIES}
                   selectedCategory={selectedCategory}
                 />
                 <div className={styles.articlesContainer}>

@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import ReactMarkdown from "react-markdown";
 import removeMd from "remove-markdown";
@@ -27,6 +26,7 @@ import { RiFacebookCircleFill as FbIcon } from "react-icons/ri";
 import { useState } from "react";
 
 import ICONS from "../../utils/icons";
+import CodeBlock from "../../components/CodeBlock";
 // const HeartFilled = ICONS.Heart;
 // const HeartOutlined = ICONS.HeartOutline;
 
@@ -76,6 +76,8 @@ const BlogView = ({ id, title, date, content, likes, onLike }) => {
                     renderers={{
                       image: Img,
                       paragraph: P,
+                      heading: Heading,
+                      code: CodeBlock,
                     }}
                   />
                 ) : (
@@ -142,10 +144,7 @@ const ReactionComponent = ({
   comments = [],
   onLike = null,
 }) => {
-  const [liked, setLiked] = useState(false);
-
-  const { route } = useRouter();
-  console.log("basePath", route);
+  // const [liked, setLiked] = useState(false);
 
   return (
     <div
@@ -225,6 +224,23 @@ const ReactionComponent = ({
   );
 };
 
+const fontSize = {
+  1: "42px",
+  2: "36px",
+  3: "32px",
+  4: "28px",
+  5: "24px",
+  6: "20px",
+};
+
+const Heading = ({ children, level }) => {
+  return (
+    <h1 style={{ fontSize: fontSize[level] || 32, fontWeight: "700" }}>
+      {children}
+    </h1>
+  );
+};
+
 const P = ({ children }) => {
   if (
     children &&
@@ -286,7 +302,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      article: { ...article }, //stats
+      article, //stats
     },
     // revalidate: 60,
   };
