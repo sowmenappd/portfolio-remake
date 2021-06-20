@@ -23,6 +23,8 @@ const SEO = ({
       <meta name="description" content={description}></meta>
       <meta name="twitter:description" content={description}></meta>
 
+      <meta name="robots" content="index, follow"></meta>
+
       <meta property="og:image" content={`https://${siteURL}${image}`}></meta>
       <meta property="og:locale" content="en_US"></meta>
       <meta name="twitter:image" content={`https://${siteURL}${image}`}></meta>
