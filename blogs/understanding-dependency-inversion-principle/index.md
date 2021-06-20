@@ -16,7 +16,7 @@ Simply said, the dependency inversion principle states that we need to rely on a
 
 ## What is system coupling?
 
-System coupling is defined as the constraining state of one item to another item inside a system. Coupling occurs on context information. For example, in an air-conditioner, the compressor is said to be coupled to the internal cooling refridgerant and cooling mechanism, since these components together make up the entirety of the cooling system.
+System coupling is defined as the constraining state of one item to another item inside a system. Coupling occurs on context information. For example, in an air-conditioner, the compressor is said to be coupled to the internal cooling refrigerant and cooling mechanism, since these components together make up the entirety of the cooling system.
 
 ## Tightly-coupled vs. loosely-coupled components?
 
