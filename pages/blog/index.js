@@ -12,10 +12,10 @@ import ICONS from "../../utils/icons";
 import getArticles from "../../getBlogs";
 import SEO from "../../components/SEO";
 
-const CATEGORIES = ["Frontend", "Backend", "DevOps", "Gamedev", "Software Engineering"]
+const CATEGORIES = ["Backend", "DevOps", "Software Engineering"];
+// "Frontend", "Gamedev",
 
 export default function Blogs({ articles }) {
-  
   const [selectedCategory, setCategory] = useState(CATEGORIES[0]);
 
   return (

@@ -3,10 +3,9 @@
 }
 
 .categoryBtnBody {
-  max-width: 150px;
-  width: 100px;
+  max-width: 250px;
   background-color: white;
-  padding: 16px 8px;
+  padding: 16px;
   text-align: center;
   color: black;
   box-shadow: 0 12px 20px #ddd9;

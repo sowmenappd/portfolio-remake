@@ -4,7 +4,7 @@ const Intro = () => (
   <>
     <div className={styles.intro}>
       <div className={styles.shortOne}>
-        <p className={styles.greeting}>Hey, my name is Sowmen</p>
+        <p className={styles.greeting}>Hello, I'm Sowmen Rahman!</p>
         <br />
         <br />
         <p className={styles.myTitle}>🌐 Full stack developer </p>

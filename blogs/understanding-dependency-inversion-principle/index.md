@@ -1,8 +1,8 @@
 ---
 title: "Understanding SOLID: Dependency Inversion Principle"
-date: "June 19, 2021"
+date: "June 20, 2021"
 category: "Software Engineering"
-tech: "NGINX, Apache"
+tech: "Class, Interface, Typescript"
 featuredImg: "/understanding-dependency-inversion-principle/cover.png"
 ---
 

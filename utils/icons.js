@@ -26,11 +26,18 @@ import {
   SiTwitter as Twitter,
   SiFacebook as Facebook,
   SiInstagram as Instagram,
+  SiTypescript as Typescript,
 } from "react-icons/si";
+
+import {
+  VscSymbolInterface as Interface,
+  VscSymbolClass as Class,
+} from "react-icons/vsc";
 
 const ICONS = {
   Apache,
   AWS,
+  Class,
   Comment,
   CSS3,
   BackArrow,
@@ -41,6 +48,7 @@ const ICONS = {
   HeartOutline,
   HTML5,
   Instagram,
+  Interface,
   NGINX,
   "Load balancing": LoadBalancing,
   NodeJs,
@@ -49,6 +57,7 @@ const ICONS = {
   Server,
   Share,
   Twitter,
+  Typescript,
 };
 
 export default ICONS;
