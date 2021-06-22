@@ -99,6 +99,38 @@ const BlogView = ({ id, title, date, content, likes, onLike }) => {
   );
 };
 
+const BlogSchema = ({ title, description, date, image }) => {
+  return (
+    <script type="application/ld+json">
+      {`{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          mainEntityOfPage: {
+            "@type": WebPage,
+            "@id": ${process.env.NEXT_PUBLIC_VERCEL_URL || "localhost:3000"} ,
+          },
+          headline: ${title},
+          description: ${description},
+          image: ${image},
+          author: {
+            "@type": "Person",
+            name: "sowmenrahman",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Sowmen Rahman",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://sowmenrahman.vercel.app/images/wide-logo.png",
+            },
+          },
+          datePublished: ${date},
+          dateModified: ${date},
+        }`}
+    </script>
+  );
+};
+
 const Blog = ({ article }) => {
   if (!article) return <div>Loading</div>;
   const { id, title, date, content, featuredImg, stats } = article;
@@ -113,6 +145,12 @@ const Blog = ({ article }) => {
     <>
       <Head>
         <title>{title}</title>
+        <BlogSchema
+          title={title}
+          description={removeMd(content.trim()).substring(6, 160)}
+          date={date}
+          image={featuredImg}
+        />
       </Head>
       <SEO
         title={title}
@@ -125,7 +163,7 @@ const Blog = ({ article }) => {
         <BlogView
           id={id}
           title={title}
-          date={date}
+          date={new Date(date).toDateString().split(" ").slice(1).join(" ")}
           featuredImg={featuredImg}
           content={content}
           likes={articleLikes}

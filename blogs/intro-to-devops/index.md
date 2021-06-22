@@ -1,6 +1,6 @@
 ---
 title: "An introduction to the theory of DevOps — why, when and how?"
-date: "January 25, 2021"
+date: "2021-01-25"
 category: "DevOps"
 tech: "NGINX, Apache"
 featuredImg: "/intro-to-devops/cover.jpg"
@@ -11,6 +11,7 @@ featuredImg: "/intro-to-devops/cover.jpg"
 ## **So.. what’s this buzz about DevOps? It won’t kill you to know about how DevOps may save your time and sanity writing code.**
 
 ### **Let’s look at a dev scenario.**
+
 It wasn’t that long ago, when coders used to write company software code, build it, then hand over the new version to the operations team for testing and debugging. The operations team would sometimes also do this ‘quality and assurance’ testing to find out how well the software would work (with or without bugs), and the potential impact of the software’s new version on the people.
 
 This process is a very lengthy process. First of all, there are two separate teams that are working on the same product, but stay completely isolated from each other; no communication between them other than in the contact periods of code finishes and dev responses, (and occasionally, probably at coffee breaks..)
@@ -26,7 +27,6 @@ If you read through that painfully long paragraph, my friend, you’re not the f
 Having reached that stage, you might suddenly realize that maybe you lack a vast range of skills that were never asked for the job at the first place. You may have a lot of questions. But I assure you:
 
 ![We’re getting there: SEPTA](https://dev-to-uploads.s3.amazonaws.com/i/9u9veuvxrjr2y5now730.jpg)
-
 
 As [SEPTA](http://septa.org/)’s slogan goes, so goes the cycle of software development at every software company that has ever existed. In context of the first scenario, when there’s simply too freaking much work for a seriously short deadline on the agile board, and for the second scenario, when there’s a wall of confusion in the mind of the developer regarding what stages of the product he’s supposed to be working on, DevOps is your friend.
 Leading infrastructure and IT innovation enterprise AWS terms DevOps as

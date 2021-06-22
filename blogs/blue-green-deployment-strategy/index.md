@@ -1,6 +1,6 @@
 ---
 title: "Blue/Green deployment strategy"
-date: "February 10, 2021"
+date: "2021-02-10"
 category: "Backend, DevOps"
 tech: "Load balancing, Server"
 featuredImg: "/blue-green-deployment-strategy/cover.jpg"

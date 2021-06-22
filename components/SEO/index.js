@@ -7,8 +7,7 @@ const SEO = ({
   type = "website",
   image = "/images/wide-logo.png",
 }) => {
-  const siteURL =
-    process.env.NEXT_PUBLIC_VERCEL_URL || "https://sowmenappd.github.io";
+  const siteURL = process.env.NEXT_PUBLIC_VERCEL_URL || "sowmenappd.github.io";
 
   return (
     <Head>
