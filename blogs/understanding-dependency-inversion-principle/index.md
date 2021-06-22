@@ -24,7 +24,7 @@ Coupling can be of two types: **tight coupling** and **loose coupling**. These r
 
 In our example before, if the cooling mechanism of the air condition was "tightly-coupled" to the compressor, then substitution of the compressor made by other companies are **highly likely to break the cooling mechanism entirely**. This would be an example of a tightly-coupled component system. Tightly-coupled components have concrete, hard-coded implementations.
 
-Loose coupling is the _exact opposite_ of the example above, where replacement of a system with one of a similar function but of different _constitution_/_implementation_, will ensure that the system works as these.
+Loose coupling is the _exact opposite_ of the example above, where replacement of a system with one of a similar function but of different _constitution_/_implementation_, will ensure that the system works just as fine.
 
 ## Let's look at a code example now
 
