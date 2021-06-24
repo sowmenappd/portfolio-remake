@@ -15,8 +15,8 @@ const Home = () => (
           "@context": "https://schema.org/",
           "@type": "Person",
           name: "Sowmen Rahman",
-          url: process.env.PUBLIC_NEXT_VERCEL_URL,
-          image: process.env.PUBLIC_NEXT_VERCEL_URL + "/images/dp.png",
+          url: process.env.NEXT_PUBLIC_VERCEL_URL,
+          image: process.env.NEXT_PUBLIC_VERCEL_URL + "/images/dp.png",
           sameAs: [
             "https://www.facebook.com/sowmen.rahman.01",
             "https://twitter.com/SowmenR",
