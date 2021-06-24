@@ -9,14 +9,16 @@ import Layout from "../components/Layout";
 const Index = () => (
   <Layout>
     <Head>
-      <script type="application/ld+json">
-        {`{
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "https://schema.org/",
             "@type": "Person",
-            "name": "Sowmen Rahman",
-            "url": "https://sowmenrahman.vercel.app",
-            "image": "https://sowmenrahman.vercel.app/images/dp.png",
-            "sameAs": [
+            name: "Sowmen Rahman",
+            url: "https://sowmenrahman.vercel.app",
+            image: "https://sowmenrahman.vercel.app/images/dp.png",
+            sameAs: [
               "https://www.facebook.com/sowmen.rahman.01",
               "https://twitter.com/SowmenR",
               "https://www.instagram.com/art1san__",
@@ -25,9 +27,10 @@ const Index = () => (
               "https://github.com/sowmenappd",
               "https://sowmenrahman.vercel.app",
             ],
-            "jobTitle": "Software Engineer",
-          }`}
-      </script>
+            jobTitle: "Software Engineer",
+          }),
+        }}
+      />
     </Head>
     <Header />
     <Intro />
