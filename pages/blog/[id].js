@@ -123,7 +123,7 @@ const BlogSchema = ({ title, description, date, image }) => {
             name: "Sowmen Rahman",
             logo: {
               "@type": "ImageObject",
-              url: "https://sowmenrahman.vercel.app/images/wide-logo.png",
+              url: process.env.NEXT_PUBLIC_VERCEL_URL + "/images/wide-logo.png",
             },
           },
           datePublished: date,
