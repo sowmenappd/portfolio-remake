@@ -13,10 +13,10 @@ const Index = () => (
         {`{
             "@context": "https://schema.org/",
             "@type": "Person",
-            name: "Sowmen Rahman",
-            url: "https://sowmenrahman.vercel.app",
-            image: "https://sowmenrahman.vercel.app/images/dp.png",
-            sameAs: [
+            "name": "Sowmen Rahman",
+            "url": "https://sowmenrahman.vercel.app",
+            "image": "https://sowmenrahman.vercel.app/images/dp.png",
+            "sameAs": [
               "https://www.facebook.com/sowmen.rahman.01",
               "https://twitter.com/SowmenR",
               "https://www.instagram.com/art1san__",
@@ -25,7 +25,7 @@ const Index = () => (
               "https://github.com/sowmenappd",
               "https://sowmenrahman.vercel.app",
             ],
-            jobTitle: "Software Engineer",
+            "jobTitle": "Software Engineer",
           }`}
       </script>
     </Head>
