@@ -113,7 +113,7 @@ const BlogSchema = ({ title, description, date, image }) => {
           },
           headline: title,
           description: description,
-          image: "test",
+          image: process.env.NEXT_PUBLIC_VERCEL_URL + image,
           author: {
             "@type": "Person",
             name: "Sowmen Rahman",
