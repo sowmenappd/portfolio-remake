@@ -67,8 +67,9 @@
 
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
   margin: auto;
   max-width: 100%;
   padding-top: 20px;

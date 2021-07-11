@@ -34,9 +34,12 @@ import {
   VscSymbolClass as Class,
 } from "react-icons/vsc";
 
+import ChakraIcon from "../components/Icon/chakra.png";
+
 const ICONS = {
   Apache,
   AWS,
+  "Chakra UI": ChakraIcon,
   Class,
   Comment,
   CSS3,

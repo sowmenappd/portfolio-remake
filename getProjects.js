@@ -24,8 +24,18 @@ async function getProjects() {
       require.context("./projects", true, /index.md$/),
       require.context("./projects", true, /images.md$/)
     );
-
-    resolve([]);
+    resolve(
+      pages
+        // TODO: add date sorting logic and remove filter function
+        // .sort((a, b) => {
+        //   const dA = new Date(a.document.data.date);
+        //   const dB = new Date(b.document.data.date);
+        //   return -(dA - dB);
+        // })
+        .filter(
+          (page) => new Date(page.document.data.date).getFullYear() > 2020
+        )
+    );
   });
 }
 

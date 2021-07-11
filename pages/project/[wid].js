@@ -56,7 +56,6 @@ const Post = () => {
   } = useRouter();
 
   useEffect(() => {
-    console.log("wid changed!");
     setTimeout(() => {
       document.body.classList.add(styles.withAnim);
     }, 0);

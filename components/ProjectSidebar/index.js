@@ -11,7 +11,7 @@ const Sidebar = ({ year, client, services, tech, website }) => (
     )}
     {client && (
       <Section>
-        <p className={styles.title}>Client</p>
+        <p className={styles.title}>Context / Client</p>
         <p className={styles.item}>{client}</p>
       </Section>
     )}
@@ -29,9 +29,9 @@ const Sidebar = ({ year, client, services, tech, website }) => (
     )}
     {tech && (
       <Section className={styles.techs}>
-        {tech.split(", ").map((t) => (
-          <Icon key={t}>{t}</Icon>
-        ))}
+        {tech.split(", ").map((t) => {
+          return <Icon key={t}>{t}</Icon>;
+        })}
       </Section>
     )}
   </div>
